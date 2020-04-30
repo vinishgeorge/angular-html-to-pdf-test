@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas'; 
 import domtoimage from 'dom-to-image';
+import { ExportService } from './export.service';
 
 @Component({
   selector: 'my-app',
@@ -13,6 +14,8 @@ export class AppComponent  {
 
   @ViewChild('content') content: ElementRef;
   @ViewChild('img') img: ElementRef;
+
+  constructor(private readonly exportService:ExportService){}
 
   makePdf() { 
     // let doc = new jsPDF();
@@ -28,6 +31,9 @@ let node = this.content.nativeElement;
 domtoimage.toPng(node)
     .then(function (dataUrl) {
         //call api to send image to be added to pdf.
+        this.exportService.exportToPDF().subscribe(data => {
+     alert("Generated");
+    });
     })
     .catch(function (error) {
         console.error('oops, something went wrong!', error);
