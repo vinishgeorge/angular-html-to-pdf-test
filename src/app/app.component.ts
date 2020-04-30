@@ -17,26 +17,28 @@ export class AppComponent  {
   constructor(private readonly exportService:ExportService){}
 
   makePdf() { 
-    // let doc = new jsPDF();
-    // doc.addHTML(document.body, {
-    //     scrollX: 0,
-    //     scrollY: 0
-    //   }, function() {
-    //    doc.save("obrz.pdf");
-    // });
-
-let node = this.content.nativeElement;
-
-domtoimage.toPng(node)
-    .then(function (dataUrl) {
-        //call api to send image to be added to pdf.
-        this.exportService.exportToPDF(dataUrl).subscribe(data => {
-     alert("Generated");
+    let doc = new jsPDF();
+    doc.addHTML(this.content.nativeElement, {
+        scrollX: 0,
+        scrollY: 0
+      }, function() {
+       doc.save("obrz.pdf");
     });
-    })
-    .catch(function (error) {
-        console.error('oops, something went wrong!', error);
-    });
+
+// let node = this.content.nativeElement;
+
+// domtoimage.toPng(node)
+//     .then(function (dataUrl) {
+
+//       console.log(dataUrl)
+//         //call api to send image to be added to pdf.
+//     //     this.exportService.exportToPDF(dataUrl).subscribe(data => {
+//     //  alert("Generated");
+//     // });
+//     })
+//     .catch(function (error) {
+//         console.error('oops, something went wrong!', error);
+//     });
 
     //document.body
   //   document.getElementById("timeline").scrollIntoView();
