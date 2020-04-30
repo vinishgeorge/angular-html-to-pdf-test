@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { Url } from './url-constants';
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ExportService {
 
 
