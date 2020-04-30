@@ -18,7 +18,7 @@ export class AppComponent  {
 
   makePdf() { 
     let doc = new jsPDF();
-    doc.addHTML(this.content.nativeElement, {
+    doc.addHTML(document.body, {
         scrollX: 0,
         scrollY: 0
       }, function() {
