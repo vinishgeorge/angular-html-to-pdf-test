@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import * as jspdf from 'jspdf';
-import html2canvas from 'html2canvas'; 
 import domtoimage from 'dom-to-image';
 import { ExportService } from './export.service';
 
