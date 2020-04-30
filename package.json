@@ -12,7 +12,6 @@
     "@angular/router": "6.0.0",
     "core-js": "2.5.5",
     "dom-to-image": "^2.6.0",
-    "html2canvas": "^1.0.0-rc.5",
     "jspdf": "1.5.2",
     "rxjs": "6.1.0",
     "zone.js": "0.8.26"
