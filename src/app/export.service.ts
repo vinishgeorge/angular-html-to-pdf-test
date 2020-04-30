@@ -7,8 +7,9 @@ export class ExportService {
 
 
   constructor(private http: HttpClient) { }
-  exportToPDF(categoryId: number): Observable<Array<any>> {
-    const href = `${Url.EXPORTTOPDF}/plan/export`;
+  exportToPDF(dataUrl: String): Observable<Array<any>> {
+    const href = `${Url.EXPORTTOPDF}/plan/export?imgData=${dataUrl}`;
+    console.log(href);
     return this.http.get<any>(href);
   }
 }

@@ -31,7 +31,7 @@ let node = this.content.nativeElement;
 domtoimage.toPng(node)
     .then(function (dataUrl) {
         //call api to send image to be added to pdf.
-        this.exportService.exportToPDF().subscribe(data => {
+        this.exportService.exportToPDF(dataUrl).subscribe(data => {
      alert("Generated");
     });
     })
