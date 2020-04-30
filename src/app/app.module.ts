@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
-import { ExportService } from './export.service';
+import { ExportService } from './exportService';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

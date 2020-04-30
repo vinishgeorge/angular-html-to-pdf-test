@@ -1,5 +1,5 @@
 <button (click)="makePdf()">make pdf</button>
-<div #content class="content">
+<div  class="content">
 	<div _ngcontent-nvr-c4="" class="site-width-container">
 		<div _ngcontent-nvr-c4="" class="grid-row">
 			<div _ngcontent-nvr-c4="" class="column-one-half nomarginbottom fullwidth">
@@ -14,7 +14,7 @@
 				<div _ngcontent-nvr-c18="">
 					<!---->
 				</div>
-				<div _ngcontent-nvr-c18=""   class="planWrapper" style="height:600px">
+				<div _ngcontent-nvr-c18="" id="timeline" #content  class="planWrapper" style="height:800px;">
 					<!---->
 					<div _ngcontent-nvr-c18="" class="gantt-container">
 						<!---->
@@ -454,6 +454,6 @@
 	</div>
 </div>
 
-<div id="canvasImg" #img  ></div>
+<img id="canvasImg" #img  />
 
 <button (click)="makePdf()">make pdf</button>
