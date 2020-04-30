@@ -3,18 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@angular/common": "6.0.0",
-    "@angular/compiler": "6.0.0",
-    "@angular/core": "6.0.0",
-    "@angular/forms": "6.0.0",
-    "@angular/platform-browser": "6.0.0",
-    "@angular/platform-browser-dynamic": "6.0.0",
-    "@angular/router": "6.0.0",
-    "core-js": "2.5.5",
+    "@angular/animations": "9.1.4",
+    "@angular/common": "^9.1.4",
+    "@angular/compiler": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "@angular/platform-browser": "^9.1.4",
     "dom-to-image": "^2.6.0",
-    "jspdf": "1.5.2",
-    "rxjs": "6.1.0",
-    "zone.js": "0.8.26"
+    "rxjs": "^6.5.5",
+    "tslib": "^1.10.0",
+    "zone.js": "^0.10.3"
   },
   "scripts": {
     "ng": "ng",
