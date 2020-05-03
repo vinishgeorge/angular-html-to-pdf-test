@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { Url } from './url-constants';
 @Injectable({
@@ -9,9 +9,11 @@ export class ExportService {
 
 
   constructor(private http: HttpClient) { }
-  exportToPDF(dataUrl: String): Observable<Array<any>> {
-    const href = `${Url.EXPORTTOPDF}/plan/export?imgData=${dataUrl}`;
+  exportToPDF(dataUrl: String): Observable<any> {
+    const href = `${Url.EXPORTTOPDF}/plan/export`;
     console.log(href);
-    return this.http.get<any>(href);
+    const data = {'imgData':dataUrl};
+    const config = { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'blob' as 'json', observe: 'response' as 'body' };
+    return this.http.post<any>(href, data, config);
   }
 }

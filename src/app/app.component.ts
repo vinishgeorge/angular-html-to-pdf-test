@@ -1,7 +1,11 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import * as jspdf from 'jspdf';
 import domtoimage from 'dom-to-image';
+
 import { ExportService } from './export.service';
+import html2canvas from 'html2canvas';
+import { getFileNameFromResponseContentDisposition, saveFile } from './file-download-helper';
+
 
 @Component({
   selector: 'my-app',
@@ -17,13 +21,13 @@ export class AppComponent  {
   constructor(private readonly exportService:ExportService){}
 
   makePdf() { 
-    let doc = new jsPDF();
-    doc.addHTML(document.body, {
-        scrollX: 0,
-        scrollY: 0
-      }, function() {
-       doc.save("obrz.pdf");
-    });
+    // let doc = new jsPDF();
+    // doc.addHTML(document.body, {
+    //     scrollX: 0,
+    //     scrollY: 0
+    //   }, function() {
+    //    doc.save("obrz.pdf");
+    // });
 
 // let node = this.content.nativeElement;
 
@@ -41,19 +45,27 @@ export class AppComponent  {
 //     });
 
     //document.body
-  //   document.getElementById("timeline").scrollIntoView();
-  //    html2canvas(document.getElementById("timeline"),{
-  //       scrollX: 0,
-  //       scrollY: 0
-  //     }).then(canvas => {
-  //      console.log(canvas.clientWidth,canvas.clientHeight);
-  //      console.log(canvas.width,canvas.height);
-  //      let pdf = new jsPDF('p', 'pt', [canvas.width, canvas.height]);
-  //     let imgData  = canvas.toDataURL("image/jpeg", 1.0);
-  //      this.img.nativeElement.src=imgData;
-  //      pdf.addImage(imgData,0,0,canvas.width, canvas.height);
-  //      pdf.save('converteddoc.pdf');
-  // });
+    this.content.nativeElement.scrollIntoView();
+     html2canvas(this.content.nativeElement,{
+        scrollX: 0,
+        scrollY: 0
+      }).then(canvas => {
+      // console.log(canvas.clientWidth,canvas.clientHeight);
+      // console.log(canvas.width,canvas.height);
+     //  let pdf = new jsPDF('p', 'pt', [canvas.width, canvas.height]);
+      let imgData  = canvas.toDataURL("image/jpeg", 1.0);
+     // console.log(imgData);
+       this.img.nativeElement.src=imgData;
+
+       this.exportService.exportToPDF(imgData).subscribe(
+        response => {
+         console.log("done****************");
+         const fileName = getFileNameFromResponseContentDisposition(response);
+         saveFile(response.body, fileName);
+      });
+      // pdf.addImage(imgData,0,0,canvas.width, canvas.height);
+      // pdf.save('converteddoc.pdf');
+  });
   // let c = document.getElementById("timeline");
   //   // overwrite owner doc inner height with your div clientHeight
   //    const body = document.createElement('body');
@@ -77,11 +89,9 @@ export class AppComponent  {
   //           });
   }
 
-   printImage(url: string): void {
+   addToIframe(innerHTML: string): HTMLIFrameElement {
     const body = document.createElement('body');
-    const img = document.createElement('img');
-    img.setAttribute('src', url);
-    body.appendChild(img);
+    body.innerHTML=innerHTML;
 
     const newIframe = document.createElement('iframe');
     this.img.nativeElement.appendChild(newIframe);
@@ -89,5 +99,6 @@ export class AppComponent  {
     newIframe.contentWindow.document.write(body.innerHTML);
     newIframe.contentWindow.document.close();
     this.img.nativeElement.innerHTML = '';
+    return newIframe;
   }
 }
