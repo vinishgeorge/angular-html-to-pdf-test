@@ -16,8 +16,7 @@ export class AppComponent  {
   name = 'Angular';
 
   @ViewChild('content') content: ElementRef;
-  @ViewChild('img') img: ElementRef;
-  @ViewChild('divElement') divElement: ElementRef;
+
   constructor(private readonly exportService:ExportService){}
 
   makePdf() { 
@@ -46,20 +45,7 @@ domtoimage.toPng(div)
         console.error('oops, something went wrong!', error);
     });
 
-    //document.body
-  //   this.content.nativeElement.scrollIntoView();
-  //    html2canvas(this.content.nativeElement,{
-  //       scrollX: 0,
-  //       scrollY: 0
-  //     }).then(canvas => {
-  //     let imgData  = canvas.toDataURL("image/jpeg", 1.0);
-
-  //      this.exportService.exportToPDF(imgData).subscribe(
-  //       response => {
-  //        const fileName = getFileNameFromResponseContentDisposition(response);
-  //        saveFile(response.body, fileName);
-  //     });
-  // });
+    
   }
 
    cloneDiv(innerHTML:string) {
@@ -70,8 +56,6 @@ domtoimage.toPng(div)
     div.innerHTML=innerHTML;
     div.id = "image_temp_div";
     document.body.appendChild(div)
-    //this.divElement.nativeElement.innerHTML=innerHTML;
-    //this.divElement.nativeElement.innerHTML = '';
     return div;
     ;
   }
