@@ -17,18 +17,23 @@ export class AppComponent  {
 
   @ViewChild('content') content: ElementRef;
 
+
   constructor(private readonly exportService:ExportService){}
 
   makePdf() { 
-   
+    const filterClassName:string=" deleteImg ";
 
 let node = this.content.nativeElement;
 let  div:HTMLDivElement=this.cloneDiv(this.content.nativeElement.innerHTML);
-domtoimage.toPng(div)
+function filter (element) {
+  var className = " " + className + " ";
+  return   !( (" " + element.className + " ").replace(/[\n\t\r]/g, " ").indexOf(filterClassName) > -1 );
+}
+domtoimage.toPng(div,{filter:filter})
     .then(imgData=> {
 
       //console.log(imgData)
-      
+     
 
       this.exportService.exportToPDF(imgData).subscribe(
               response => {
