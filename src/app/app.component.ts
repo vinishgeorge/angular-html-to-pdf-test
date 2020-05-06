@@ -34,7 +34,7 @@ domtoimage.toPng(div,{filter:filter})
 
       //console.log(imgData)
      
-
+     // imgData= this.rotateBase64Image90deg(imgData,true);
       this.exportService.exportToPDF(imgData).subscribe(
               response => {
                const fileName = getFileNameFromResponseContentDisposition(response);
@@ -64,4 +64,31 @@ domtoimage.toPng(div,{filter:filter})
     return div;
     ;
   }
+
+  rotateBase64Image90deg(base64Image, isClockwise) {
+    // create an off-screen canvas
+    let offScreenCanvas = document.createElement('canvas');
+    let offScreenCanvasCtx = offScreenCanvas.getContext('2d');
+
+    // cteate Image
+    let img = new Image();
+    img.src = base64Image;
+
+    // set its dimension to rotated size
+    offScreenCanvas.height = 1000;
+    offScreenCanvas.width = 1000;
+
+    // rotate and draw source image into the off-screen canvas:
+    if (isClockwise) { 
+        offScreenCanvasCtx.rotate(90 * Math.PI / 180);
+        offScreenCanvasCtx.translate(0, -offScreenCanvas.width);
+    } else {
+        offScreenCanvasCtx.rotate(-90 * Math.PI / 180);
+        offScreenCanvasCtx.translate(-offScreenCanvas.height, 0);
+    }
+    offScreenCanvasCtx.drawImage(img, 0, 0);
+
+    // encode image to data-uri with base64
+    return offScreenCanvas.toDataURL("image/png", 100);
+}
 }
